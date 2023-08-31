@@ -22,10 +22,28 @@ main {
     justify-content: space-between;
 }
 
-div.top {
+div.top,
+div.bottom {
     display: flex;
     justify-content: space-between;
 }
+
+div.bottom {
+    align-items: end;
+}
+
+.social-media i {
+    font-size: 50px;
+    margin-right: 10px;
+}
+
+.fa-instagram {
+    color: transparent;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
 
 h1.time {
     text-align: center;
@@ -81,4 +99,10 @@ p.weather-temp {
     margin: 0;
     font-size: 1.7rem;
     margin-left: -10px;
+}
+
+p.quote {
+    max-width: 30%;
+    font-size: 1.5rem; /* 24px */
+    text-align: center;
 }

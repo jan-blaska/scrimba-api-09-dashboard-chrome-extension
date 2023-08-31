@@ -1,10 +1,11 @@
 
-
-fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
+// Background image
+fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=travel")
     .then(res => res.json())
     .then(data => {
+        console.log(data)
         document.body.style.backgroundImage = `url(${data.urls.regular})`
-		document.getElementById("author").textContent = `By: ${data.user.name}`
+		document.getElementById("image-author").textContent = `Image by: ${data.user.name}`
     })
     .catch(err => {
         // Use a default background image/author
@@ -13,6 +14,9 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 		document.getElementById("author").textContent = `By: Dodi Achmad`
     })
 
+
+// Crypto   
+/* 
 fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     .then(res => {
         if (!res.ok) {
@@ -32,7 +36,10 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
         `
     })
     .catch(err => console.error(err))
+*/
 
+
+// Time and greeting
 function getCurrentTime() {
     // time
     const date = new Date()
@@ -54,6 +61,27 @@ function getCurrentTime() {
 }
 
 setInterval(getCurrentTime, 1000)
+
+
+// Quote
+fetch('https://api.api-ninjas.com/v1/quotes?category=inspirational', {
+    headers: { 'X-Api-Key': 'vp0UDSSNIeTPowIFA7Nr0g==1jTPFRuBQNuRNse5'}
+})
+    .then(res => {
+        if (!res.ok) {
+            throw Error("Quote not loaded")
+        }
+        return res.json()
+    })
+    .then(data => {
+        document.getElementById('quote').textContent = data[0].quote
+        document.getElementById('quote-author').textContent = `Quote by: ${data[0].author}`
+    })
+    .catch(err => {
+        document.getElementById('quote').textContent = "You have power over your mind - not outside events. Realize this, and you will find strength."
+        document.getElementById('quote-author').textContent = "Marcus Aurelius"
+    })
+
 
 ///////////////////////////////////////////////////////////
 /* Variant of weather forecast based on user´s location. */
@@ -78,6 +106,8 @@ navigator.geolocation.getCurrentPosition(position => {
 });
 */
 
+
+// Weather forecast
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=Prague&units=metric&APPID=d8747767a69064beb0e1d244904c631f`)
         .then(res => {
             if (!res.ok) {
