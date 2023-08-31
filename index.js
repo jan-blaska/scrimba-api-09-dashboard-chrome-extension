@@ -1,3 +1,5 @@
+
+
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
     .then(res => res.json())
     .then(data => {
@@ -32,14 +34,32 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     .catch(err => console.error(err))
 
 function getCurrentTime() {
+    // time
     const date = new Date()
     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
+    
+    // greeting user based on the time
+    const greetingUserEl = document.getElementById('greeting')
+    const hours = date.getHours()
+    const userName = "Honza"
+    if(hours >= 18) {
+        greetingUserEl.textContent = `Good evening, ${userName}!`
+    } else if (hours >= 12) {
+        greetingUserEl.textContent = `Good afternoon, ${userName}!`
+    } else if ((hours >= 6)) {
+        greetingUserEl.textContent = `Good morning, ${userName}!`
+    } else {
+        greetingUserEl.textContent = `Hey ${userName}, you should be sleeping or partying!`
+    }   
 }
 
 setInterval(getCurrentTime, 1000)
 
+///////////////////////////////////////////////////////////
+/* Variant of weather forecast based on user´s location. */
+/*
 navigator.geolocation.getCurrentPosition(position => {
-    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=d8747767a69064beb0e1d244904c631f`)
         .then(res => {
             if (!res.ok) {
                 throw Error("Weather data not available")
@@ -56,3 +76,21 @@ navigator.geolocation.getCurrentPosition(position => {
         })
         .catch(err => console.error(err))
 });
+*/
+
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=Prague&units=metric&APPID=d8747767a69064beb0e1d244904c631f`)
+        .then(res => {
+            if (!res.ok) {
+                throw Error("Weather data not available")
+            }
+            return res.json()
+        })
+        .then(data => {
+            const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+            document.getElementById("weather").innerHTML = `
+                <img src=${iconUrl} />
+                <p class="weather-temp">${Math.round(data.main.temp)}º</p>
+                <p class="weather-city">${data.name}</p>
+            `
+        })
+        .catch(err => console.error(err))

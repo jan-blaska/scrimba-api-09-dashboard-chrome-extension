@@ -29,6 +29,14 @@ div.top {
 
 h1.time {
     text-align: center;
+    font-size: 5rem; /* 80px */ 
+    margin-bottom: 0;
+}
+
+h2.greeting {
+    text-align: center;
+    font-size: 3rem; /* 48px */ 
+    margin-top: 0;
 }
 
 div#crypto {
